@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
+dotenv.config();
 
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
@@ -12,8 +13,7 @@ const blogRoutes = require("./routes/blogRoutes");
 const experienceRoutes = require("./routes/experienceRoutes");
 const testimonialRoutes = require("./routes/testimonialRoutes");
 const serviceRoutes = require("./routes/serviceRoutes");
-
-dotenv.config();
+const uploadRoutes = require("./routes/uploadRoutes");
 
 const app = express();
 
@@ -31,6 +31,7 @@ app.use("/api/cms/blogs", blogRoutes);
 app.use("/api/cms/experience", experienceRoutes);
 app.use("/api/cms/testimonials", testimonialRoutes);
 app.use("/api/cms/services", serviceRoutes);
+app.use("/api/cms/upload", uploadRoutes);
 
 // Connect MongoDB
 connectDB();
