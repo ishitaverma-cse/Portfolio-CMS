@@ -8,12 +8,16 @@ const {
 } = require("../controllers/testimonialController");
 
 const protect = require("../middleware/authMiddleware");
+const adminOnly = require("../middleware/adminOnly");
 
 const router = express.Router();
 
+// Public
 router.get("/", getTestimonials);
-router.post("/", protect, createTestimonial);
-router.put("/:id", protect, updateTestimonial);
-router.delete("/:id", protect, deleteTestimonial);
+
+// Admin only
+router.post("/", protect, adminOnly, createTestimonial);
+router.put("/:id", protect, adminOnly, updateTestimonial);
+router.delete("/:id", protect, adminOnly, deleteTestimonial);
 
 module.exports = router;

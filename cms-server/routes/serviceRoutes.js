@@ -8,12 +8,16 @@ const {
 } = require("../controllers/serviceController");
 
 const protect = require("../middleware/authMiddleware");
+const adminOnly = require("../middleware/adminOnly");
 
 const router = express.Router();
 
+// Public
 router.get("/", getServices);
-router.post("/", protect, createService);
-router.put("/:id", protect, updateService);
-router.delete("/:id", protect, deleteService);
+
+// Admin only
+router.post("/", protect, adminOnly, createService);
+router.put("/:id", protect, adminOnly, updateService);
+router.delete("/:id", protect, adminOnly, deleteService);
 
 module.exports = router;

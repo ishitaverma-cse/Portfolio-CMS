@@ -1,15 +1,18 @@
-const dotenv = require("dotenv");
+const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
-const connectDB = require("../config/db");
-const Admin = require("../models/Admin");
+const dotenv = require("dotenv");
+
+const User = require("../models/User");
 
 dotenv.config();
 
 const createAdmin = async () => {
   try {
-    await connectDB();
+    await mongoose.connect(process.env.MONGO_URI);
 
-    const existingAdmin = await Admin.findOne({
+    console.log("Connected to MongoDB");
+
+    const existingAdmin = await User.findOne({
       email: "admin@portfolio.com",
     });
 
@@ -20,18 +23,21 @@ const createAdmin = async () => {
 
     const hashedPassword = await bcrypt.hash("Admin@123", 10);
 
-    const admin = await Admin.create({
+    const admin = await User.create({
       name: "Portfolio Admin",
       email: "admin@portfolio.com",
       password: hashedPassword,
+      role: "admin",
     });
 
     console.log("Admin created successfully");
-    console.log("Admin ID:", admin._id);
+    console.log("Name:", admin.name);
+    console.log("Email:", admin.email);
+    console.log("Role:", admin.role);
 
     process.exit(0);
   } catch (error) {
-    console.error("Failed to create admin:", error.message);
+    console.error("Error creating admin:", error.message);
     process.exit(1);
   }
 };

@@ -1,31 +1,30 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const Admin = require("../models/Admin");
+const User = require("../models/User");
 
-const loginAdmin = async (req, res) => {
+const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Validate input
     if (!email || !password) {
       return res.status(400).json({
         message: "Email and password are required",
       });
     }
 
-    // Find admin
-    const admin = await Admin.findOne({ email: email.toLowerCase() });
+    const user = await User.findOne({
+      email: email.toLowerCase(),
+    });
 
-    if (!admin) {
+    if (!user) {
       return res.status(401).json({
         message: "Invalid email or password",
       });
     }
 
-    // Compare password
     const isPasswordValid = await bcrypt.compare(
       password,
-      admin.password
+      user.password
     );
 
     if (!isPasswordValid) {
@@ -34,12 +33,11 @@ const loginAdmin = async (req, res) => {
       });
     }
 
-    // Generate JWT
     const token = jwt.sign(
       {
-        id: admin._id,
-        email: admin.email,
-        role: "admin",
+        id: user._id,
+        email: user.email,
+        role: user.role,
       },
       process.env.JWT_SECRET,
       {
@@ -48,17 +46,19 @@ const loginAdmin = async (req, res) => {
     );
 
     res.status(200).json({
-      message: "Admin login successful",
+      message: "Login successful",
+
       token,
-      admin: {
-        id: admin._id,
-        name: admin.name,
-        email: admin.email,
-        role: "admin",
+
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
       },
     });
   } catch (error) {
-    console.error("Admin login error:", error.message);
+    console.error("Login error:", error.message);
 
     res.status(500).json({
       message: "Server error",
@@ -67,5 +67,5 @@ const loginAdmin = async (req, res) => {
 };
 
 module.exports = {
-  loginAdmin,
+  loginUser,
 };
