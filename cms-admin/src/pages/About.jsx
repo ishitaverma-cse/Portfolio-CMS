@@ -13,6 +13,7 @@ import api from "../services/api";
 
 function About() {
     const [formData, setFormData] = useState({
+        name: "",
         title: "",
         description: "",
         profileImage: "",
@@ -35,6 +36,7 @@ function About() {
                 const response = await api.get("/about");
 
                 setFormData({
+                    name: response.data.name || "",
                     title: response.data.title || "",
                     description: response.data.description || "",
                     profileImage: response.data.profileImage || "",
@@ -98,6 +100,7 @@ function About() {
             );
 
             setFormData({
+                name: response.data.about.name || "",
                 title: response.data.about.title || "",
                 description:
                     response.data.about.description || "",
@@ -115,7 +118,7 @@ function About() {
         } catch (error) {
             setError(
                 error.response?.data?.message ||
-                    "Failed to update About content."
+                "Failed to update About content."
             );
 
             console.error(
@@ -267,6 +270,28 @@ function About() {
                                     onSubmit={handleSubmit}
                                     className="space-y-6 pt-7"
                                 >
+
+                                    {/* NAME */}
+
+                                    <div>
+                                        <label
+                                            htmlFor="name"
+                                            className="mb-2 block text-xs font-semibold uppercase tracking-[0.12em] text-gray-500"
+                                        >
+                                            Name
+                                        </label>
+
+                                        <input
+                                            id="name"
+                                            name="name"
+                                            type="text"
+                                            value={formData.name}
+                                            onChange={handleChange}
+                                            required
+                                            placeholder="e.g. Ishita Verma"
+                                            className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-gray-950 focus:bg-white focus:ring-1 focus:ring-gray-950"
+                                        />
+                                    </div>
 
                                     {/* TITLE */}
 
@@ -481,7 +506,7 @@ function About() {
                                                 formData.profileImage
                                             }
                                             alt="Profile preview"
-                                            className="h-28 w-28 rounded-2xl object-cover shadow-sm"
+                                            className="h-64 w-full rounded-2xl object-contain bg-gray-50"
                                             onError={(e) => {
                                                 e.currentTarget.style.display =
                                                     "none";
@@ -507,9 +532,12 @@ function About() {
                                     </p>
 
                                     <h3 className="mt-3 text-2xl font-semibold tracking-tight text-gray-950">
-                                        {formData.title ||
-                                            "Your Title"}
+                                        {formData.name || "Your Name"}
                                     </h3>
+
+                                    <p className="mt-2 text-sm font-medium text-gray-500">
+                                        {formData.title || "Your Title"}
+                                    </p>
 
                                     <p className="mt-4 text-sm leading-6 text-gray-500">
                                         {formData.description ||
