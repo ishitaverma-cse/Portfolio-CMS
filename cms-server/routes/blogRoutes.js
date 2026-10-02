@@ -2,6 +2,7 @@ const express = require("express");
 
 const {
   getBlogs,
+  getBlogBySlug,
   createBlog,
   updateBlog,
   deleteBlog,
@@ -14,6 +15,7 @@ const router = express.Router();
 
 // Public
 router.get("/", getBlogs);
+router.get("/:slug", getBlogBySlug);
 
 // Admin only
 router.post("/", protect, adminOnly, createBlog);

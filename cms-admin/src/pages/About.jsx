@@ -413,7 +413,6 @@ function About() {
                                     </div>
 
                                     {/* LOCATION */}
-
                                     <div>
                                         <label
                                             htmlFor="location"
@@ -478,7 +477,6 @@ function About() {
                         {/* =================================================
                             PREVIEW
                         ================================================= */}
-
                         <div className="xl:col-span-5">
 
                             <div className="sticky top-8 rounded-2xl border border-gray-300 bg-white p-7">
@@ -498,7 +496,6 @@ function About() {
                                 </div>
 
                                 {/* PROFILE IMAGE */}
-
                                 <div className="mt-7 flex justify-center">
                                     {formData.profileImage ? (
                                         <img
