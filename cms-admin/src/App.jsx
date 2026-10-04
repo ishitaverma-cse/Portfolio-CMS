@@ -16,7 +16,6 @@ import Experience from "./pages/Experience";
 import Services from "./pages/Services";
 import AuthHandoff from "./pages/AuthHandoff";
 
-import AuthRequired from "./pages/AuthRequired";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -24,12 +23,39 @@ function App() {
     <BrowserRouter>
       <Routes>
 
+        {/* Default */}
         <Route
           path="/"
-          element={<Navigate to="/dashboard" replace />}
+          element={<Navigate to="/login" replace />}
         />
+
+        {/* Public */}
         <Route path="/login" element={<Login />} />
-        <Route path="/about" element={<About />} />
+
+        <Route
+          path="/auth-handoff"
+          element={<AuthHandoff />}
+        />
+
+        {/* Protected CMS Pages */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/about"
+          element={
+            <ProtectedRoute>
+              <About />
+            </ProtectedRoute>
+          }
+        />
+
         <Route
           path="/skills"
           element={
@@ -38,6 +64,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/projects"
           element={
@@ -46,6 +73,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/blogs"
           element={
@@ -54,6 +82,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/testimonials"
           element={
@@ -62,6 +91,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/experience"
           element={
@@ -70,29 +100,12 @@ function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/services"
           element={
             <ProtectedRoute>
               <Services />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/auth-handoff"
-          element={<AuthHandoff />}
-        />
-
-        <Route
-          path="/auth-required"
-          element={<AuthRequired />}
-        />
-
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
             </ProtectedRoute>
           }
         />

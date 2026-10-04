@@ -14,7 +14,7 @@ function ProtectedRoute({ children }) {
   }
 
   if (!token || !admin || admin.role !== "admin") {
-    return <Navigate to="/auth-required" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   return children;
