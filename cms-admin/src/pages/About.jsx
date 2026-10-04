@@ -19,6 +19,9 @@ function About() {
         profileImage: "",
         resumeUrl: "",
         location: "",
+        githubUrl: "",
+        linkedinUrl: "",
+        email: "",
     });
 
     const [loading, setLoading] = useState(true);
@@ -42,6 +45,9 @@ function About() {
                     profileImage: response.data.profileImage || "",
                     resumeUrl: response.data.resumeUrl || "",
                     location: response.data.location || "",
+                    githubUrl: response.data.githubUrl || "",
+                    linkedinUrl: response.data.linkedinUrl || "",
+                    email: response.data.email || "",
                 });
             } catch (error) {
                 if (error.response?.status === 404) {
@@ -110,6 +116,12 @@ function About() {
                     response.data.about.resumeUrl || "",
                 location:
                     response.data.about.location || "",
+                githubUrl:
+                    response.data.about.githubUrl || "",
+                linkedinUrl:
+                    response.data.about.linkedinUrl || "",
+                email:
+                    response.data.about.email || "",
             });
 
             setMessage(
@@ -444,6 +456,75 @@ function About() {
                                         </div>
                                     </div>
 
+                                    {/* GITHUB */}
+
+                                    <div>
+                                        <label
+                                            htmlFor="githubUrl"
+                                            className="mb-2 block text-xs font-semibold uppercase tracking-[0.12em] text-gray-500"
+                                        >
+                                            GitHub URL
+                                        </label>
+
+                                        <div className="relative">
+                                            <input
+                                                id="githubUrl"
+                                                name="githubUrl"
+                                                type="url"
+                                                value={formData.githubUrl}
+                                                onChange={handleChange}
+                                                placeholder="https://github.com/yourusername"
+                                                className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-gray-950 focus:bg-white focus:ring-1 focus:ring-gray-950"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    {/* LINKEDIN */}
+
+                                    <div>
+                                        <label
+                                            htmlFor="linkedinUrl"
+                                            className="mb-2 block text-xs font-semibold uppercase tracking-[0.12em] text-gray-500"
+                                        >
+                                            LinkedIn URL
+                                        </label>
+
+                                        <div className="relative">
+                                            <input
+                                                id="linkedinUrl"
+                                                name="linkedinUrl"
+                                                type="url"
+                                                value={formData.linkedinUrl}
+                                                onChange={handleChange}
+                                                placeholder="https://www.linkedin.com/in/yourusername"
+                                                className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-gray-950 focus:bg-white focus:ring-1 focus:ring-gray-950"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    {/* EMAIL */}
+
+                                    <div>
+                                        <label
+                                            htmlFor="email"
+                                            className="mb-2 block text-xs font-semibold uppercase tracking-[0.12em] text-gray-500"
+                                        >
+                                            Email
+                                        </label>
+
+                                        <div className="relative">
+                                            <input
+                                                id="email"
+                                                name="email"
+                                                type="email"
+                                                value={formData.email}
+                                                onChange={handleChange}
+                                                placeholder="yourname@example.com"
+                                                className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-gray-950 focus:bg-white focus:ring-1 focus:ring-gray-950"
+                                            />
+                                        </div>
+                                    </div>
+
                                     {/* SAVE */}
 
                                     <div className="flex items-center justify-between border-t border-gray-100 pt-6">
@@ -563,9 +644,7 @@ function About() {
 
                                     {formData.resumeUrl && (
                                         <a
-                                            href={
-                                                formData.resumeUrl
-                                            }
+                                            href={formData.resumeUrl}
                                             target="_blank"
                                             rel="noreferrer"
                                             className="group flex items-center justify-between text-sm font-medium text-gray-900 transition hover:text-gray-500"
@@ -573,9 +652,7 @@ function About() {
                                             <div className="flex items-center gap-3">
                                                 <FileText
                                                     size={16}
-                                                    strokeWidth={
-                                                        1.6
-                                                    }
+                                                    strokeWidth={1.6}
                                                     className="text-gray-400"
                                                 />
 
@@ -586,9 +663,7 @@ function About() {
 
                                             <ArrowUpRight
                                                 size={16}
-                                                strokeWidth={
-                                                    1.5
-                                                }
+                                                strokeWidth={1.5}
                                                 className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                                             />
                                         </a>
@@ -596,8 +671,77 @@ function About() {
 
                                 </div>
 
+                                {/* SOCIAL & CONTACT */}
+
+                                {(formData.githubUrl ||
+                                    formData.linkedinUrl ||
+                                    formData.email) && (
+                                        <div className="mt-7 border-t border-gray-100 pt-6">
+
+                                            <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-gray-400">
+                                                Connect
+                                            </p>
+
+                                            <div className="space-y-3">
+
+                                                {formData.githubUrl && (
+                                                    <a
+                                                        href={formData.githubUrl}
+                                                        target="_blank"
+                                                        rel="noreferrer"
+                                                        className="group flex items-center justify-between text-sm font-medium text-gray-900 transition hover:text-blue-600"
+                                                    >
+                                                        <span>GitHub</span>
+
+                                                        <ArrowUpRight
+                                                            size={16}
+                                                            strokeWidth={1.5}
+                                                            className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                                                        />
+                                                    </a>
+                                                )}
+
+                                                {formData.linkedinUrl && (
+                                                    <a
+                                                        href={formData.linkedinUrl}
+                                                        target="_blank"
+                                                        rel="noreferrer"
+                                                        className="group flex items-center justify-between text-sm font-medium text-gray-900 transition hover:text-blue-600"
+                                                    >
+                                                        <span>LinkedIn</span>
+
+                                                        <ArrowUpRight
+                                                            size={16}
+                                                            strokeWidth={1.5}
+                                                            className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                                                        />
+                                                    </a>
+                                                )}
+
+                                                {formData.email && (
+                                                    <a
+                                                        href={`mailto:${formData.email}`}
+                                                        className="group flex items-center justify-between text-sm font-medium text-gray-900 transition hover:text-blue-600"
+                                                    >
+                                                        <span>{formData.email}</span>
+
+                                                        <ArrowUpRight
+                                                            size={16}
+                                                            strokeWidth={1.5}
+                                                            className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                                                        />
+                                                    </a>
+                                                )}
+
+                                            </div>
+                                        </div>
+                                    )}
+
                                 {!formData.location &&
-                                    !formData.resumeUrl && (
+                                    !formData.resumeUrl &&
+                                    !formData.githubUrl &&
+                                    !formData.linkedinUrl &&
+                                    !formData.email && (
                                         <p className="mt-7 border-t border-gray-100 pt-6 text-center text-xs text-gray-400">
                                             Add your location or resume
                                             URL to see them here.

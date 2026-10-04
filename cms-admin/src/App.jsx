@@ -14,6 +14,7 @@ import Blogs from "./pages/Blogs";
 import Testimonials from "./pages/Testimonials";
 import Experience from "./pages/Experience";
 import Services from "./pages/Services";
+import AuthHandoff from "./pages/AuthHandoff";
 
 import AuthRequired from "./pages/AuthRequired";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -76,6 +77,10 @@ function App() {
               <Services />
             </ProtectedRoute>
           }
+        />
+        <Route
+          path="/auth-handoff"
+          element={<AuthHandoff />}
         />
 
         <Route

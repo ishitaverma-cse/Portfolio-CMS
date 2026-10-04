@@ -14,6 +14,7 @@ const experienceRoutes = require("./routes/experienceRoutes");
 const testimonialRoutes = require("./routes/testimonialRoutes");
 const serviceRoutes = require("./routes/serviceRoutes");
 const uploadRoutes = require("./routes/uploadRoutes");
+const contactRoutes = require("./routes/contactRoutes");
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use("/api/cms/experience", experienceRoutes);
 app.use("/api/cms/testimonials", testimonialRoutes);
 app.use("/api/cms/services", serviceRoutes);
 app.use("/api/cms/upload", uploadRoutes);
+app.use("/api/contact", contactRoutes);
 
 // Connect MongoDB
 connectDB();
