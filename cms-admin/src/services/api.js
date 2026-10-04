@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/cms";
+const API_URL = "https://portfolio-cms-my0b.onrender.com/api/cms";
 
 const api = axios.create({
   baseURL: API_URL,
