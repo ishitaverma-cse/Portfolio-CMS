@@ -74,7 +74,12 @@ function Sidebar() {
         localStorage.removeItem("cmsToken");
         localStorage.removeItem("cmsAdmin");
 
-        window.location.href = "http://localhost:5173";
+        const portfolioUrl =
+            window.location.hostname === "localhost"
+                ? "http://localhost:5173"
+                : "https://iv-studio-portfolio.vercel.app";
+
+        window.location.href = portfolioUrl;
     };
 
     return (
